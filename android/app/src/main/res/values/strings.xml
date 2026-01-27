@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">FreshDrops</string>
+    <string name="title_activity_main">FreshDrops</string>
+    <string name="package_name">com.freshdrops.app</string>
+    <string name="custom_url_scheme">com.freshdrops.app</string>
+</resources>
