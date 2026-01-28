@@ -30,8 +30,18 @@ const App = () => {
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-6">
             <Link to="/" className="hover:underline">New Request</Link>
-            <Link to="/dashboard" className="hover:underline">Dashboard</Link>
-            <Link to="/approvers" className="hover:underline">Manage Approvers</Link>
+            {localStorage.getItem('approver_token') && (
+  <Link to="/dashboard" className="hover:underline">
+    Dashboard
+  </Link>
+)}
+
+            {localStorage.getItem('approver_token') && (
+  <Link to="/approvers" className="hover:underline">
+    Manage Approvers
+  </Link>
+)}
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -54,20 +64,26 @@ const App = () => {
             >
               New Request
             </Link>
-            <Link
-              to="/dashboard"
-              onClick={() => setMenuOpen(false)}
-              className="block hover:underline"
-            >
-              Dashboard
-            </Link>
-            <Link
-              to="/approvers"
-              onClick={() => setMenuOpen(false)}
-              className="block hover:underline"
-            >
-              Manage Approvers
-            </Link>
+           {localStorage.getItem('approver_token') && (
+  <Link
+    to="/dashboard"
+    onClick={() => setMenuOpen(false)}
+    className="block hover:underline"
+  >
+    Dashboard
+  </Link>
+)}
+
+           {localStorage.getItem('approver_token') && (
+  <Link
+    to="/approvers"
+    onClick={() => setMenuOpen(false)}
+    className="block hover:underline"
+  >
+    Manage Approvers
+  </Link>
+)}
+
           </div>
         )}
       </nav>
@@ -87,7 +103,15 @@ const App = () => {
 />
         <Route path="/request/:id" element={<RequestDetails />} />
         <Route path="/approve/:token" element={<ApprovalPage/>} />
-        <Route path="/approvers" element={<ApproverManagement/>} />
+        <Route
+  path="/approvers"
+  element={
+    <ProtectedRoute>
+      <ApproverManagement />
+    </ProtectedRoute>
+  }
+/>
+
       </Routes>
     </BrowserRouter>
   );
