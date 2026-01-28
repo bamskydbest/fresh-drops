@@ -29,18 +29,18 @@ const App = () => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-6">
-            {/* <Link to="/" className="hover:underline">New Request</Link> */}
-            {localStorage.getItem('approver_token') && (
+            <Link to="/" className="hover:underline">New Request</Link>
+            {/* {localStorage.getItem('approver_token') && ( */}
   <Link to="/dashboard" className="hover:underline">
     Dashboard
   </Link>
-)}
+{/* )} */}
 
-            {localStorage.getItem('approver_token') && (
+            {/* {localStorage.getItem('approver_token') && ( */}
   <Link to="/approvers" className="hover:underline">
     Manage Approvers
   </Link>
-)}
+
 
           </div>
 
@@ -64,7 +64,7 @@ const App = () => {
             >
               New Request
             </Link>
-           {localStorage.getItem('approver_token') && (
+           {/* {localStorage.getItem('approver_token') && ( */}
   <Link
     to="/dashboard"
     onClick={() => setMenuOpen(false)}
@@ -72,9 +72,9 @@ const App = () => {
   >
     Dashboard
   </Link>
-)}
+{/* )} */}
 
-           {localStorage.getItem('approver_token') && (
+           {/* {localStorage.getItem('approver_token') && ( */}
   <Link
     to="/approvers"
     onClick={() => setMenuOpen(false)}
@@ -82,7 +82,7 @@ const App = () => {
   >
     Manage Approvers
   </Link>
-)}
+{/* )} */}
 
           </div>
         )}
