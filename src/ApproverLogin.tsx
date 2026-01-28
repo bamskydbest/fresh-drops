@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from './config/api';
 
-const ApproverLogin = () => {
+
+interface ApproverLoginProps {
+  setLoggedIn?: (value: boolean) => void; // optional
+}
+
+const ApproverLogin = ({ setLoggedIn }: ApproverLoginProps) => {
   const navigate = useNavigate();
 
   const [phone, setPhone] = useState('');
@@ -34,30 +39,33 @@ const ApproverLogin = () => {
     }
   };
 
-  const verifyOtp = async () => {
-    if (!otp) return alert('Enter OTP');
+const verifyOtp = async () => {
+  if (!otp) return alert('Enter OTP');
 
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_URL}/auth/verify-otp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, otp }),
-      });
+  setLoading(true);
+  try {
+    const res = await fetch(`${API_URL}/auth/verify-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, otp }),
+    });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
 
-      localStorage.setItem('approver_token', data.token);
+    localStorage.setItem('approver_token', data.token);
 
-      alert('✅ Login successful');
-      navigate('/dashboard');
-    } catch (err: any) {
-      alert(err.message || 'Invalid OTP');
-    } finally {
-      setLoading(false);
-    }
-  };
+    // Notify App that user is now logged in
+    if (setLoggedIn) setLoggedIn(true);
+
+    alert('✅ Login successful');
+    navigate('/dashboard');
+  } catch (err: any) {
+    alert(err.message || 'Invalid OTP');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
