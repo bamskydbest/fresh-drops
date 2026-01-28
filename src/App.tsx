@@ -29,7 +29,7 @@ const App = () => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-6">
-            <Link to="/" className="hover:underline">New Request</Link>
+            {/* <Link to="/" className="hover:underline">New Request</Link> */}
             {localStorage.getItem('approver_token') && (
   <Link to="/dashboard" className="hover:underline">
     Dashboard
